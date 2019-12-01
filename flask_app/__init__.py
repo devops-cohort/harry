@@ -15,6 +15,7 @@ db = getenv('MYSQL_DATABASE')
 # Parse together the URI in order to connect to database
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + user + ':' + password + '@35.197.245.254/' + db
 db = SQLAlchemy(app)
-app.config['SECRET_KEY'] = '7218a9143c27c16610765205a1b21cb7'
+# Added security
+app.config['SECRET_KEY'] = '65s4df21rt354sd32rf4g354s3d5f424r4ts3dajk4l35'
 
 from application import routes

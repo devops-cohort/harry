@@ -1,41 +1,107 @@
+'''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for
 from application import app, db
-from application.models import Posts
-from application.forms import PostForm
+import application.models
+import application.forms
 
+''' NOT IMPLEMENTED
+# Route to login page
+@app.route('/login')
+@app.route('/signin')
+def login():
+	# Define a form to allow user to log in
+	form = LogInForm()
+	# If the form passes validation:
+	if form.validate_on_submit():
+		# Create an object based on the Users model (is this the best approach??)
+		loginData = Users(
+			user_name = form.user_name.data,
+			password = form.last_name.data
+		)
+		# Query database for user name matching that in the form
+		# NEEDS SOME KIND OF CONDITIONAL FOR IF THE USERNAME IS NOT FOUND
+		user_data = session.query(Users).filter(Users.user_name == loginData.user_name).all()
+		# Checks is password in form matches password in database for that user
+		# If so, directs user to home page
+		if user_data.password == loginData.password:
+			return redirect(url_for('home'))
+		else:
+			print(form.errors)
+	# Else, throw an error to the user
+	else:
+		print(form.errors)
+
+	return render_template('login.html', title='Login')
+
+# Route to sign up page
+@app.route('/signup')
+@app.route('/register')
+def signup():
+	# Define a form to allow user to sign up
+	form = SignUpForm()
+	
+	if form.validate_on_submit():
+		loginData = Users(
+			user_name = form.user_name.data,
+			password = form.last_name.data
+		)
+		
+		# Send data to database
+		db.session.add(loginData)
+		db.session.commit()
+		return redirect(url_for('login'))
+	else:
+		print(form.errors)
+
+	return render_template('signup.html', title='Sign Up')
+'''
+
+# Route to home page
 @app.route('/')
 @app.route('/home')
 def home():
-        post_data = Posts.query.all()
-        return render_template('home.html', title='Home', posts=post_data)
+	# Needs code here to redirect user to login page if they are not logged in
+	# I think this redirect needs to be extended to each route
+	post_data = Observations.query.all()
+	return render_template('home.html', title='Home', posts=post_data)
 
+# Route to about page
 @app.route('/about')
 def about():
-        return render_template('about.html', title='About')
+	return render_template('about.html', title='About')
 
-@app.route('/login')
-def login():
-        return render_template('login.html', title='Login')
+'''NOT IMPLEMENTED
+# Route to sign out page
+@app.route('/signout')
+def signout():
+	# Should redirect back to login page
+	# Possible this needn't be a page in its own right, might just be a link that logs you out
+	return render_template('signout.html', title='Sign Out')
 
-@app.route('/register')
-def register():
-        return render_template('register.html', title='Register')
+# Route to celestial database
+@app.route('/lookup')
+@app.route('/query')
+def query():
+	return render_template('query.html', title='Look Up')
+'''
 
+# Route to observation post page
 @app.route('/post', methods = ['GET', 'POST'])
 def post():
-        form = PostForm()
-        
-        if form.validate_on_submit():
-            postData = Posts(
-                first_name = form.first_name.data,
-                last_name = form.last_name.data,
-                title = form.title.data,
-                content = form.content.data
-            )
-        
-            db.session.add(postData)
-            db.session.commit()
-            return redirect(url_for('home'))
-        else:
-            print(form.errors)
-        return render_template('post.html', title = 'Post', form = form)
+	form = PostForm()
+	
+	if form.validate_on_submit():
+		postData = Posts(
+			first_name = form.first_name.data,
+			last_name = form.last_name.data,
+			title = form.title.data,
+			content = form.content.data
+		)
+		
+		db.session.add(postData)
+		db.session.commit()
+		return redirect(url_for('home'))
+	else:
+		print(form.errors)
+
+	return render_template('post.html', title = 'Post', form = form)
