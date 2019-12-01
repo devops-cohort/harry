@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block body_content %}
+<div class="form">
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<div class="form-group">
+			{{ form.name.label }}
+			{% if form.name.errors %}
+				{{ form.name }}
+				<div class="error">
+					{% for error in form.name.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.name }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			{{ form.right_ascension.label }}
+			{% if form.right_ascension.errors %}
+				{{ form.right_ascension }}
+				<div class="error">
+					{% for error in form.right_ascension.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.right_ascension }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			{{ form.declination.label }}
+			{% if form.declination.errors %}
+				{{ form.declination }}
+				<div class="error">
+					{% for error in form.declination.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.declination }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			{{ form.asterism.label }}
+			{% if form.asterism.errors %}
+				{{ form.asterism }}
+				<div class="error">
+					{% for error in form.asterism.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.asterism }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			{{ form.description.label }}
+			{% if form.description.errors %}
+				{{ form.description }}
+				<div class="error">
+					{% for error in form.description.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.description }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+			{{ form.submit }}
+		</div>
+	</form>
+</div>
+{% endblock body_content %}
