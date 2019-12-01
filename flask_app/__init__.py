@@ -18,4 +18,4 @@ db = SQLAlchemy(app)
 # Added security
 app.config['SECRET_KEY'] = '65s4df21rt354sd32rf4g354s3d5f424r4ts3dajk4l35'
 
-from application import routes
+from flask_app import routes

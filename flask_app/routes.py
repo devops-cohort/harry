@@ -1,8 +1,8 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for
-from application import app, db
-import application.models
-import application.forms
+from  flask_app import app, db
+import flask_app.models
+import flask_app.forms
 
 ''' NOT IMPLEMENTED
 # Route to login page
@@ -62,8 +62,8 @@ def signup():
 def home():
 	# Needs code here to redirect user to login page if they are not logged in
 	# I think this redirect needs to be extended to each route
-	post_data = Observations.query.all()
-	return render_template('home.html', title='Home', posts=post_data)
+	'''post_data = Observations.query.all()'''
+	return render_template('home.html', title='Home')
 
 # Route to about page
 @app.route('/about')

@@ -1,9 +1,9 @@
 '''Tables for the database are defined here'''
-from application import db
+from flask_app import db
 
 ''' NOT IMPLEMENTED
 class Users(db.Model):
-	#__name__ = 'user'
+	__name__ = 'user'
 	userID = db.Column(db.Integer, primary_key = True, autoincrement = True)
 	user_name = db.Column(db.String(15), nullable = False, unique = True)
 	password = db.Column(db.String(30), nullable = False)
@@ -14,7 +14,8 @@ class Users(db.Model):
 			'User Name: ', self.user_name, '\r\n',
 			'User ID: ', self.userID
 		])
-
+'''
+'''
 class Observations(db.Model):
 	#__name__ = 'observation'
 	observationID = db.Column(db.Integer, primary_key = True, autoincrement = True)
@@ -40,7 +41,8 @@ class Observations(db.Model):
 			'Altitude: ', self.altitude '\r\n',
 			'Description: ', self.description
 		])
-
+'''
+'''
 # Table to store star information
 class Stars(db.Model):
 	#__name__ = 'star'
@@ -77,7 +79,7 @@ class Constellations(db.Model):
 	declination = db.Column(db.String(30), nullable = False)
 	asterism = db.Column(db.String(30), nullable = True)
 	description = db.Column(db.Text, nullable = True)
-	stars = relationship('Stars', backref = 'constellation', lazy = True)
+	stars = db.relationship('Stars', backref = 'constellation', lazy = True)
 
 	# Function to return a representation of a constellation entity when the database is queried
 	def __repr__(self):
