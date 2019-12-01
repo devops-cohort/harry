@@ -97,7 +97,7 @@ class ConstellationForm(FlaskForm):
 	name = StringField('Name',
 		validators = [
 			DataRequired(),
-			Length(min = 1, max = 30)
+			Length(min = 1, max = 50)
 		])
 	right_ascension = StringField('Right Ascension',
 		validators = [
@@ -107,7 +107,7 @@ class ConstellationForm(FlaskForm):
 	declination = StringField('Declination',
 		validators = [
 			DataRequired(),
-			Length(min = 1, max = 100)
+			Length(min = 1, max = 30)
 		])
 	asterism = StringField('Asterism',
 		validators = [

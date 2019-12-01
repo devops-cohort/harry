@@ -62,8 +62,8 @@ def signup():
 def home():
 	# Needs code here to redirect user to login page if they are not logged in
 	# I think this redirect needs to be extended to each route
-	'''post_data = Observations.query.all()'''
-	return render_template('home.html', title='Home')
+	constellation_data = Constellations.query.all()
+	return render_template('home.html', title='Home', post = constellation_data)
 
 # Route to about page
 @app.route('/about')
@@ -86,22 +86,23 @@ def query():
 '''
 
 # Route to observation post page
-@app.route('/post', methods = ['GET', 'POST'])
-def post():
-	form = PostForm()
+@app.route('/enterconstellation', methods = ['GET', 'POST'])
+def enter_constellation():
+	form = ConstellationForm()
 	
 	if form.validate_on_submit():
-		postData = Posts(
-			first_name = form.first_name.data,
-			last_name = form.last_name.data,
-			title = form.title.data,
-			content = form.content.data
+		constellation_data = Constellations(
+			name = form.name.data,
+			right_ascension = form.last_name.data,
+			declination = form.title.data,
+			asterism = form.content.data,
+			description = form.description.data
 		)
 		
-		db.session.add(postData)
+		db.session.add(constellation_data)
 		db.session.commit()
 		return redirect(url_for('home'))
 	else:
 		print(form.errors)
 
-	return render_template('post.html', title = 'Post', form = form)
+	return render_template('enterconstellation.html', title = 'Enter Constellation', form = form)
