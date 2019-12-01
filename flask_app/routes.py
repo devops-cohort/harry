@@ -2,7 +2,7 @@
 from flask import render_template, redirect, url_for
 from  flask_app import app, db
 import flask_app.models
-import flask_app.forms
+from flask_app.forms import ConstellationForm
 
 ''' NOT IMPLEMENTED
 # Route to login page
