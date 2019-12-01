@@ -79,7 +79,7 @@ class Constellations(db.Model):
 	declination = db.Column(db.String(30), nullable = False)
 	asterism = db.Column(db.String(30), nullable = True)
 	description = db.Column(db.Text, nullable = True)
-	stars = db.relationship('Stars', backref = 'constellation', lazy = True)
+	'''stars = db.relationship('Stars', backref = 'constellation', lazy = True)'''
 
 	# Function to return a representation of a constellation entity when the database is queried
 	def __repr__(self):

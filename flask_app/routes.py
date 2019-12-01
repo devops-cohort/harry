@@ -1,7 +1,7 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for
 from  flask_app import app, db
-import flask_app.models
+from flask_app.models import Constellations
 import flask_app.forms
 
 ''' NOT IMPLEMENTED
