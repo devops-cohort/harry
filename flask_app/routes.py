@@ -93,9 +93,9 @@ def enter_constellation():
 	if form.validate_on_submit():
 		constellation_data = Constellations(
 			name = form.name.data,
-			right_ascension = form.last_name.data,
-			declination = form.title.data,
-			asterism = form.content.data,
+			right_ascension = form.right_ascension.data,
+			declination = form.declination.data,
+			asterism = form.asterism.data,
 			description = form.description.data
 		)
 		
