@@ -6,13 +6,13 @@ class Users(db.Model):
 	userID = db.Column(db.Integer, primary_key = True, autoincrement = True)
 	user_name = db.Column(db.String(15), nullable = False, unique = True)
 	email = db.Column(db.String(75), nullable = False, unique = True)
-	password = db.Column(db.String(30), nullable = False)
+	password = db.Column(db.String(100), nullable = False)
 	#observations = relationship('Observations', backref = 'user', lazy = True)
 
 	def __repr__(self):
 		return ''.join([
 			'User Name: ', self.user_name, '\r\n',
-			'User ID: ', self.userID, '\r\n',
+			'User ID: ', str(self.userID), '\r\n',
 			'Email: ', self.email
 		])
 '''

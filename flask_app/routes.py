@@ -1,6 +1,6 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for
-from flask_app import app, db
+from flask_app import app, db, bcrypt
 from flask_app.models import Constellations, Users
 from flask_app.forms import ConstellationForm, SignUpForm
 
@@ -34,27 +34,25 @@ def login():
 	return render_template('login.html', title='Login')
 '''
 # Route to sign up page
-@app.route('/signup')
-@app.route('/register')
+@app.route('/signup', methods = ['GET', 'POST'])
 def signup():
 	# Define a form to allow user to sign up
 	form = SignUpForm()
 	
 	if form.validate_on_submit():
-		userData = Users(
-			user_name = form.user_name.data,
-			email = form.email.data,
-			password = form.password.data
-		)
-		
+		# Hash Pasword
+		hashed_pw = bcrypt.generate_password_hash(form.password.data)
+		user = Users(user_name = form.user_name.data,
+				email = form.email.data,
+				password = hashed_pw)
 		# Send data to database
-		db.session.add(userData)
+		db.session.add(user)
 		db.session.commit()
 		return redirect(url_for('home'))
 	else:
 		print(form.errors)
 
-	return render_template('signup.html', title='Sign Up')
+	return render_template('signup.html', title='Sign Up', form = form)
 
 # Route to home page
 @app.route('/')

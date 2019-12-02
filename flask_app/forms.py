@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateTimeField, FloatField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
+from flask_app.models import Users
 
 # Class for logging in
 class SignUpForm(FlaskForm):
@@ -24,6 +25,12 @@ class SignUpForm(FlaskForm):
 			EqualTo('password')
 		])
 	submit = SubmitField('Sign Up')
+
+	def validate_email(self, email):
+		user = Users.query.filter_by(email=email.data).first()
+
+		if user:
+			raise ValidationError('Email is already in use!')
 '''
 # Class for signing up
 class SignUpForm(FlaskForm):
