@@ -1,8 +1,8 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for
-from  flask_app import app, db
-from flask_app.models import Constellations
-from flask_app.forms import ConstellationForm
+from flask_app import app, db
+from flask_app.models import Constellations, Users
+from flask_app.forms import ConstellationForm, SignUpForm
 
 ''' NOT IMPLEMENTED
 # Route to login page
@@ -32,7 +32,7 @@ def login():
 		print(form.errors)
 
 	return render_template('login.html', title='Login')
-
+'''
 # Route to sign up page
 @app.route('/signup')
 @app.route('/register')
@@ -41,20 +41,20 @@ def signup():
 	form = SignUpForm()
 	
 	if form.validate_on_submit():
-		loginData = Users(
+		userData = Users(
 			user_name = form.user_name.data,
-			password = form.last_name.data
+			email = form.email.data,
+			password = form.password.data
 		)
 		
 		# Send data to database
-		db.session.add(loginData)
+		db.session.add(userData)
 		db.session.commit()
-		return redirect(url_for('login'))
+		return redirect(url_for('home'))
 	else:
 		print(form.errors)
 
 	return render_template('signup.html', title='Sign Up')
-'''
 
 # Route to home page
 @app.route('/')

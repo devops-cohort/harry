@@ -1,20 +1,20 @@
 '''Tables for the database are defined here'''
 from flask_app import db
 
-''' NOT IMPLEMENTED
 class Users(db.Model):
-	__name__ = 'user'
+	#__name__ = 'user'
 	userID = db.Column(db.Integer, primary_key = True, autoincrement = True)
 	user_name = db.Column(db.String(15), nullable = False, unique = True)
+	email = db.Column(db.String(75), nullable = False, unique = True)
 	password = db.Column(db.String(30), nullable = False)
-	observations = relationship('Observations', backref = 'user', lazy = True)
+	#observations = relationship('Observations', backref = 'user', lazy = True)
 
 	def __repr__(self):
 		return ''.join([
 			'User Name: ', self.user_name, '\r\n',
-			'User ID: ', self.userID
+			'User ID: ', self.userID, '\r\n',
+			'Email: ', self.email
 		])
-'''
 '''
 class Observations(db.Model):
 	#__name__ = 'observation'

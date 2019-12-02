@@ -1,19 +1,30 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, DateTimeField, FloatField, SubmitField
-from wtforms.validators import DataRequired, Length
+from wtforms import StringField, DateTimeField, FloatField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Length, Email, EqualTo
 
-''' NOT IMPLEMENTED
 # Class for logging in
-class LogInForm(FlaskForm):
+class SignUpForm(FlaskForm):
 	user_name = StringField('User Name',
 		validators = [
-			DataRequired()
+			DataRequired(),
+			Length(min = 3, max = 15)
 		])
-	password = StringField('Password',
+	email = StringField('Email',
 		validators = [
-			DataRequired()
+			DataRequired(),
+			Email()
 		])
-
+	password = PasswordField('Password',
+		validators = [
+			DataRequired(),
+		])
+	confirm_password = PasswordField('Confirm Password',
+		validators = [
+			DataRequired(),
+			EqualTo('password')
+		])
+	submit = SubmitField('Sign Up')
+'''
 # Class for signing up
 class SignUpForm(FlaskForm):
 	user_name = StringField('User Name',
