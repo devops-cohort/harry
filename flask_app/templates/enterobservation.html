@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+{% block body_content %}
+<h1>Enter an Observation</h1>
+<p>Here you can post your observations up to the database</p>
+<div class="form">
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+		<div class="form-group">
+			{{ form.title.label }}
+			{% if form.title.errors %}
+				{{ form.title }}
+				<div class="error">
+					{% for error in form.title.errors %}
+						<span>{{ error }}</span>
+					{% endfor %}
+				</div>
+			{% else %}
+				{{ form.title }}
+			{% endif %}
+		</div>
+		<br>
+		<div class="form-group">
+                        {{ form.location.label }}
+                        {% if form.location.errors %}
+                                {{ form.location }}
+                                <div class="error">
+                                        {% for error in form.location.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.location }}
+                        {% endif %}
+                </div>
+                <br>
+		<div class="form-group">
+                        {{ form.azimuth.label }}
+                        {% if form.azimuth.errors %}
+                                {{ form.azimuth }}
+                                <div class="error">
+                                        {% for error in form.azimuth.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.azimuth }}
+                        {% endif %}
+                </div>
+                <br>
+		<div class="form-group">
+                        {{ form.altitude.label }}
+                        {% if form.altitude.errors %}
+                                {{ form.altitude }}
+                                <div class="error">
+                                        {% for error in form.altitude.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.altitude }}
+                        {% endif %}
+                </div>
+                <br>
+		<div class="form-group">
+                        {{ form.description.label }}
+                        {% if form.description.errors %}
+                                {{ form.description }}
+                                <div class="error">
+                                        {% for error in form.description.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.description }}
+                        {% endif %}
+                </div>
+                <br>
+		<div class="form-group">
+			{{ form.submit }}
+		</div>
+	</form>
+</div>
+{% endblock body_content %}

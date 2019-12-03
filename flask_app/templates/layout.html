@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<title>{{ title }} - Page</title>
+	<title>{{ title }} - Stargazing</title>
+		<div class="title">
+			<h1>Stargazing</h1>
+		</div>
 		<div class="navbar">
-			<h2>Navigation</h2>
-			<p>
+			<h2><b>Navigation:</b>
 				{% if current_user.is_authenticated  %}
 					<a href="{{ url_for('home') }}">Home</a>
 					<a href="{{ url_for('about') }}">About</a>
-					<a href="{{ url_for('enter_constellation') }}">Enter Constellation</a>
+					<a href="{{ url_for('enter_observation') }}">Enter Observation</a>
+					<a href="{{ url_for('account') }}">Account</a>
 					<a href="{{ url_for('logout') }}">Log Out</a>
 				{% else %}
 					<a href="{{ url_for('home') }}">Home</a>
@@ -16,7 +19,7 @@
 					<a href="{{ url_for('login') }}">Log In</a>
 					<a href="{{ url_for('signup') }}">Sign Up</a>
 				{% endif  %}
-			</p>
+			</h2>
 		</div>
 	</head>
 	<body>
