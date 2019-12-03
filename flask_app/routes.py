@@ -60,8 +60,8 @@ def signup():
 def home():
     # Needs code here to redirect user to login page if they are not logged in
     # I think this redirect needs to be extended to each route
-    constellation_data = Constellations.query.all()
-    return render_template('home.html', title='Home', post = constellation_data)
+    # constellation_data = Constellations.query.all()
+    return render_template('home.html', title='Home')
 
 # Route to about page
 @app.route('/about')
