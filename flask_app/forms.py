@@ -56,19 +56,18 @@ class LogInForm(FlaskForm):
 
     remember = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
-    '''
+    
     def validate_user(self, email):
-        user = Users.query.filter_by(user=user.data)
+        user = Users.query.filter_by(user=user.data).first()
 
         if user == False:
             raise ValidationError('User name not recognised')
 
     def validate_password(self, email):
-        user = Users.query.filter_by(password=password.data)
+        user = Users.query.filter_by(password=password.data).first()
 
         if user == False:
             raise ValidationError('Incorrect password')
-    '''
 
 class UpdateAccountForm(FlaskForm):
     user_name = StringField('User Name',
