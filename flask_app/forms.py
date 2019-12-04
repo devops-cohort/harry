@@ -57,13 +57,13 @@ class LogInForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
     
-    def validate_user(self, email):
+    def validate_user(self, user_name):
         user = Users.query.filter_by(user=user.data).first()
 
         if user == False:
             raise ValidationError('User name not recognised')
 
-    def validate_password(self, email):
+    def validate_password(self, password):
         user = Users.query.filter_by(password=password.data).first()
 
         if user == False:
