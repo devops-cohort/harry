@@ -25,6 +25,8 @@ def login():
                 return redirect(next_page)
             else:
                 return redirect(url_for('home'))
+    else:
+        print(form.errors)
 
     return render_template('login.html', title='Login', form = form)
 
