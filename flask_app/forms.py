@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateTimeField, FloatField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from flask_app.models import Users
 from flask_login import current_user
 
@@ -51,11 +51,24 @@ class LogInForm(FlaskForm):
         ])
     password = PasswordField('Password',
         validators = [
-	    DataRequired()
+            DataRequired()
 	])
 
     remember = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
+    '''
+    def validate_user(self, email):
+        user = Users.query.filter_by(user=user.data)
+
+        if user == False:
+            raise ValidationError('User name not recognised')
+
+    def validate_password(self, email):
+        user = Users.query.filter_by(password=password.data)
+
+        if user == False:
+            raise ValidationError('Incorrect password')
+    '''
 
 class UpdateAccountForm(FlaskForm):
     user_name = StringField('User Name',
