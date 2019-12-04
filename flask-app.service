@@ -3,6 +3,6 @@ Description=Flask Application
 [Service]
 User=pythonadm
 WorkingDirectory=/opt/flask-app
-ExecStart=/bin/bash -c 'cd /opt/flask-app && source ~/.bashrc && source ./venv/bin/activate && gunicorn --bind=0.0.0.0:8001 --workers=4 flask_app:app && python ./app.py'
+ExecStart=/bin/bash -c 'cd /opt/flask-app && source ~/.bashrc && source ./venv/bin/activate && python ./app.py'
 [Install]
 WantedBy=multi-user.target
