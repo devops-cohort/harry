@@ -12,13 +12,14 @@ app = Flask(__name__)
 # Set login details from environment variables
 user = getenv('MYSQL_USER')
 password = getenv('MYSQL_PASSWORD')
+url = getenv('MYSQL_URL')
 db = getenv('MYSQL_DATABASE')
 secret = getenv('MYSQL_SECRETKEY')
 
 # Parse together the URI in order to connect to database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + user + ':' + password + '@34.89.105.168/' + db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://' + user + ':' + password + '@' + url + '/' + db
 # Added security
-app.config['SECRET_KEY'] = 'sd6g4d56s4g2s4dg54pu6456fdg45'
+app.config['SECRET_KEY'] = secret
 
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
