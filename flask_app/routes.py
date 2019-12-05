@@ -1,7 +1,7 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for, request
 from flask_app import app, db, bcrypt
-from flask_app.models import Observations, Users
+from flask_app.models import Observations, Users, observers
 from flask_app.forms import ObservationForm, SignUpForm, LogInForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -67,10 +67,8 @@ def signup():
 @app.route('/')
 @app.route('/home')
 def home():
-    # Needs code here to redirect user to login page if they are not logged in
-    # I think this redirect needs to be extended to each route
     observations = Observations.query.all()
-    return render_template('home.html', title = 'Home', posts = observations)
+    return render_template('home.html', title = 'Home', posts = observations, observers = observers)
 
 # Route to about page
 @app.route('/about')
@@ -106,15 +104,27 @@ def enter_observation():
         observation_data = Observations(
             title = form.title.data,
             author = current_user,
-            observer1 = form.observer1.data,
-            observer2 = form.observer2.data,
             location = form.location.data,
             azimuth = form.azimuth.data,
             altitude = form.altitude.data,
             description = form.description.data
         )
-
         db.session.add(observation_data)
+
+        observer1 = Users.query.filter_by(form.observer1.data)
+
+        observer1_data = observers(
+            observationID = observation_data.observationID
+            userID = observer1.userID
+        )
+        db.session.add(observer1_data)
+
+        observer2_data = observers(
+            observationID = 
+            userID = db.query.filter_by(form.observer2.data).userID
+        )
+        db.session.add(observer2_data)
+        
         db.session.commit()
         return redirect(url_for('home'))
     else:

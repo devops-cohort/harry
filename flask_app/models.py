@@ -5,8 +5,8 @@ from datetime import datetime
 
 # Joining table to allow many-to-many relationship between users and observations
 observers = db.Table('observers', db.Model.metadata,
-    db.Column('userID', db.Integer, db.ForeignKey('users.userID')),
-    db.Column('observationID', db.Integer, db.ForeignKey('observations.observationID'))
+    db.Column('observationID', db.Integer, db.ForeignKey('observations.observationID')),
+    db.Column('userID', db.Integer, db.ForeignKey('users.userID'))
 )
 
 # Class to define the table schema for the user information stored in the database
@@ -20,7 +20,6 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable = False, unique = True) # User Surname
 
     # Define relationship with observations, 'secondary' refers to joining table to allow for many-to-many relationship
-    observers = db.relationship('Observations', secondary = observers, backref = 'observers', lazy = True)
     observations = db.relationship('Observations', backref = 'author', lazy = True)
 
     # Getter function for 'load_user' function to get userID
@@ -51,6 +50,9 @@ class Observations(db.Model):
     azimuth = db.Column(db.Float, nullable = False) # Azimuth coordinate
     altitude = db.Column(db.Float, nullable = False) # Altitude coordinate
     description = db.Column(db.Text, nullable = True) # Description of the observation
+    
+    observers = db.relationship('Observations', secondary = observers, backref = 'observers', lazy = True)
+
     # Not Implemented
     # star = db.Column(db.Integer, ForeignKey('star.starID'), nullable = False) # foreign key
     # constellation = db.Column(db.Integer, ForeignKey('star.constellation'), nullable = False) # foreign key
