@@ -58,7 +58,7 @@ class LogInForm(FlaskForm):
     submit = SubmitField('Sign In')
     
     def validate_user(self, user_name):
-        user = Users.query.filter_by(user=user.data).first()
+        user = Users.query.filter_by(user=user_name.data).first()
 
         if user == False:
             raise ValidationError('User name not recognised')
@@ -105,6 +105,8 @@ class ObservationForm(FlaskForm):
             DataRequired(),
             Length(min = 1, max = 30)
         ])
+    observer1 = StringField('Observer 1')
+    observer2 = StringField('Observer 2')
     location = StringField('Location',
         validators = [
             DataRequired(),
@@ -123,6 +125,18 @@ class ObservationForm(FlaskForm):
             Length(min = 1, max = 2000)
         ])
     submit = SubmitField('Submit')
+
+    def validate_observer_1(self, observer1):
+        user = Users.query.filter_by(user=observer1.data).first()
+
+        if user == False:
+            raise ValidationError('User name not recognised')
+
+    def validate_user(self, observer2):
+        user = Users.query.filter_by(user=observer2.data).first()
+
+        if user == False:
+            raise ValidationError('User name not recognised')
 
 '''
 # Class for star post form

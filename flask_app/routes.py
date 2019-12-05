@@ -96,6 +96,37 @@ def account():
         form.email.data = current_user.email
     return render_template('account.html', title = 'Account', form = form)
 
+# Route to observation post page
+@app.route('/enterobservation', methods = ['GET', 'POST'])
+@login_required
+def enter_observation():
+    form = ObservationForm()
+
+    if form.validate_on_submit():
+        observation_data = Observations(
+            title = form.title.data,
+            author = current_user,
+            observer1 = form.observer1.data,
+            observer2 = form.observer2.data,
+            location = form.location.data,
+            azimuth = form.azimuth.data,
+            altitude = form.altitude.data,
+            description = form.description.data
+        )
+
+        db.session.add(observation_data)
+        db.session.commit()
+        return redirect(url_for('home'))
+    else:
+        print(form.errors)
+
+    return render_template('enterobservation.html', title = 'Enter Observation', form = form)
+
+# Route to coverage report page
+@app.route('/coverage')
+def coverage_report():
+    return render_template('coveragereport.html', title = 'Coverage Report')
+
 '''
 # Route to celestial database
 @app.route('/lookup')
@@ -127,31 +158,3 @@ def enter_constellation():
 
     return render_template('enterconstellation.html', title = 'Enter Constellation', form = form)
 '''
-# Route to observation post page
-@app.route('/enterobservation', methods = ['GET', 'POST'])
-@login_required
-def enter_observation():
-    form = ObservationForm()
-
-    if form.validate_on_submit():
-        observation_data = Observations(
-            title = form.title.data,
-            author = current_user,
-            location = form.location.data,
-            azimuth = form.azimuth.data,
-            altitude = form.altitude.data,
-            description = form.description.data
-        )
-
-        db.session.add(observation_data)
-        db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        print(form.errors)
-
-    return render_template('enterobservation.html', title = 'Enter Observation', form = form)
-
-# Route to coverage report page
-@app.route('/coverage')
-def coverage_report():
-    return render_template('coveragereport.html', title = 'Coverage Report')
