@@ -4,7 +4,7 @@ from flask_login import UserMixin
 from datetime import datetime
 
 # Joining table to allow many-to-many relationship between users and observations
-observers = db.Table('observers', db.Base.metadata,
+observers = db.Table('observers', db.Model.metadata,
     db.Column('userID', db.Integer, db.ForeignKey('user.userID')),
     db.Column('observationID', db.Integer, db.ForeignKey('observation.observationID'))
 )
