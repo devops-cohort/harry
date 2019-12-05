@@ -22,7 +22,6 @@ pipeline {
 			virtualenv -p python3 venv
 			source venv/bin/activate
 			pip install -r requirements.txt
-			EOF
                 '''
             }
 	}
@@ -34,7 +33,6 @@ pipeline {
 			cd ${install_dir}
 			source venv/bin/activate
 			pytest --cov-config=.coveragerc --cov-report html:cov_html --cov=. testing
-			EOF
                 '''
             }
         }
