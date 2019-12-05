@@ -21,6 +21,7 @@ class Users(db.Model, UserMixin):
 
     # Define relationship with observations, 'secondary' refers to joining table to allow for many-to-many relationship
     observations = db.relationship('Observations', backref = 'author', lazy = True)
+    observers = db.relationship('Observations', secondary = observers, backref = db.backref('observers', lazy = 'dynamic'))
 
     # Getter function for 'load_user' function to get userID
     def get_id(self):
@@ -50,8 +51,6 @@ class Observations(db.Model):
     azimuth = db.Column(db.Float, nullable = False) # Azimuth coordinate
     altitude = db.Column(db.Float, nullable = False) # Altitude coordinate
     description = db.Column(db.Text, nullable = True) # Description of the observation
-    
-    observers = db.relationship('Observations', secondary = observers, backref = 'observers', lazy = True)
 
     # Not Implemented
     # star = db.Column(db.Integer, ForeignKey('star.starID'), nullable = False) # foreign key

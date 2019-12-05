@@ -1,20 +1,23 @@
 '''Python file that handles hyperlink routing within the site'''
 from flask import render_template, redirect, url_for, request
 from flask_app import app, db, bcrypt
-from flask_app.models import Observations, Users, observers
+from flask_app.models import Observations, Users
 from flask_app.forms import ObservationForm, SignUpForm, LogInForm, UpdateAccountForm
 from flask_login import login_user, current_user, logout_user, login_required
 
 # Route to login page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    # If user navigates to this page when logged in, redirect to home page
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 	
     # Define a form to allow user to log in
     form = LogInForm()
 	
+    # If the form passes validation checks
     if form.validate_on_submit():
+        # 
         user = Users.query.filter_by(user_name=form.user_name.data).first()
 	
         if user and bcrypt.check_password_hash(user.password, form.password.data):
@@ -30,6 +33,7 @@ def login():
 
     return render_template('login.html', title='Login', form = form)
 
+# Route logs the currently logged-in user out
 @app.route("/logout")
 def logout():
     logout_user()
@@ -38,6 +42,7 @@ def logout():
 # Route to sign up page
 @app.route('/signup', methods = ['GET', 'POST'])
 def signup():
+    # If user navigates to this page when logged in, redirect to home page
     if current_user.is_authenticated:
         return redirect(url_for('home'))
 
@@ -68,7 +73,7 @@ def signup():
 @app.route('/home')
 def home():
     observations = Observations.query.all()
-    return render_template('home.html', title = 'Home', posts = observations, observers = observers)
+    return render_template('home.html', title = 'Home', posts = observations)
 
 # Route to about page
 @app.route('/about')
@@ -109,28 +114,19 @@ def enter_observation():
             altitude = form.altitude.data,
             description = form.description.data
         )
+        # Create an association with the observers and the observation
+        if observer1.data != None:
+            observation_data.observers.append(form.observer1)
+        if observer2.data != None:
+            observation_data.observers.append(form.observer2)
+        # Add these changes to the database and commit
         db.session.add(observation_data)
-
-        observer1 = Users.query.filter_by(form.observer1.data)
-
-        observer1_data = observers(
-            observationID = observation_data.observationID
-            userID = observer1.userID
-        )
-        db.session.add(observer1_data)
-
-        observer2_data = observers(
-            observationID = 
-            userID = db.query.filter_by(form.observer2.data).userID
-        )
-        db.session.add(observer2_data)
-        
         db.session.commit()
         return redirect(url_for('home'))
     else:
         print(form.errors)
 
-    return render_template('enterobservation.html', title = 'Enter Observation', form = form)
+    return render_template('enterobservation.html', title = 'Enter Observation', form = form) 
 
 # Route to coverage report page
 @app.route('/coverage')
