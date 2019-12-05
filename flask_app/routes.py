@@ -115,9 +115,9 @@ def enter_observation():
             description = form.description.data
         )
         # Create an association with the observers and the observation
-        if observer1.data != None:
+        if form.observer1.data != None:
             observation_data.observers.append(form.observer1)
-        if observer2.data != None:
+        if form.observer2.data != None:
             observation_data.observers.append(form.observer2)
         # Add these changes to the database and commit
         db.session.add(observation_data)
