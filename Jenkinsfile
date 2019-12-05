@@ -8,14 +8,7 @@ pipeline {
 	}
 	stage('Test') {
             steps {
-                sh '''
-			# configure python virtual environment and install dependencies
-			sudo su - pythonadm << EOF
-			cd ${install_dir}
-			source venv/bin/activate
-			pytest --cov-config=.coveragerc --cov-report html:cov_html --cov=. testing
-			EOF
-                '''
+                sh 'bash test.sh'
             }
         }
         stage('Run') {
