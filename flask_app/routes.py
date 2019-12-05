@@ -150,3 +150,8 @@ def enter_observation():
         print(form.errors)
 
     return render_template('enterobservation.html', title = 'Enter Observation', form = form)
+
+# Route to coverage report page
+@app.route('/coverage')
+def coverage_report():
+    return render_template('coveragereport.html', title = 'Coverage Report')

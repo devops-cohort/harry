@@ -59,3 +59,18 @@ class TestObservations(TestBase):
         db.session.commit()
 
         self.assertEqual(Observations.query.count(), 1)
+
+class TestLogin(TestBase):
+
+    def test_login_view(self):
+        '''
+        Test that login is accessible without login
+        '''
+        response = self.client.get(url_for('home'))
+        self.assertEqual(response.status_code, 200)
+    
+    #def test_login(self):
+    #    '''
+    #    Test that one can log in correctly using user info in the database
+    #    '''
+        
