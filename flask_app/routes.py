@@ -117,10 +117,10 @@ def enter_observation():
 
         # Create an association with the observers and the observation
         if form.observer1.data != None:
-            observer1_id = Users.query.filter_by(user_name = form.observer1)
+            observer1_id = Users.query.filter_by(user_name = form.observer1).first()
             observation_data.observers.append(observer1_id.userID)
         if form.observer2.data != None:
-            observer2_id = Users.query.filter_by(user_name = form.observer2)
+            observer2_id = Users.query.filter_by(user_name = form.observer2).first()
             observation_data.observers.append(observer2_id.userID)
 
         # Add these changes to the database and commit
