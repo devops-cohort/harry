@@ -18,7 +18,35 @@
 				{{ form.title }}
 			{% endif %}
 		</div>
-		<br>
+                <br>
+                <div class="form-group">
+                        {{ form.observer1.label }}
+                        {% if form.observer1.errors %}
+                                {{ form.observer1 }}
+                                <div class="error">
+                                        {% for error in form.observer1.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.observer1 }}
+                        {% endif %}
+                </div>
+                <br>
+                <div class="form-group">
+                        {{ form.observer2.label }}
+                        {% if form.observer2.errors %}
+                                {{ form.observer2 }}
+                                <div class="error">
+                                        {% for error in form.observer2.errors %}
+                                                <span>{{ error }}</span>
+                                        {% endfor %}
+                                </div>
+                        {% else %}
+                                {{ form.observer2 }}
+                        {% endif %}
+                </div>
+                <br>
 		<div class="form-group">
                         {{ form.location.label }}
                         {% if form.location.errors %}
