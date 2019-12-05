@@ -17,7 +17,7 @@ pipeline {
 			sudo cp -r ./* ${install_dir}
 			sudo chown -R pythonadm:pythonadm ${install_dir}
 			# configure python virtual environment and install dependencies
-			sudo su - pythonadm >> EOF
+			sudo su - pythonadm << EOF
 			cd ${install_dir}
 			virtualenv -p python3 venv
 			source venv/bin/activate
@@ -30,11 +30,10 @@ pipeline {
             steps {
                 sh '''
 			# configure python virtual environment and install dependencies
-			sudo su - pythonadm
+			sudo su - pythonadm << EOF
 			cd ${install_dir}
-			source venv/bin/activate >> EOF
+			source venv/bin/activate
 			pytest --cov-config=.coveragerc --cov-report html:cov_html --cov=. testing
-			mv cov_html/index.html flask_app/templates/index.html
 			EOF
                 '''
             }
