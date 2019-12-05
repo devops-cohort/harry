@@ -5,8 +5,8 @@ from datetime import datetime
 
 # Joining table to allow many-to-many relationship between users and observations
 observers = db.Table('observers', db.Model.metadata,
-    db.Column('userID', db.Integer, db.ForeignKey('user.userID')),
-    db.Column('observationID', db.Integer, db.ForeignKey('observation.observationID'))
+    db.Column('userID', db.Integer, db.ForeignKey('users.userID')),
+    db.Column('observationID', db.Integer, db.ForeignKey('observations.observationID'))
 )
 
 # Class to define the table schema for the user information stored in the database
