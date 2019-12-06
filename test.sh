@@ -1,5 +1,5 @@
 # configure python virtual environment and install dependencies
-install_dir=/opt/flask-app
+install_dir=/opt/flask-app-development
 sudo su - pythonadm << EOF
 cd ${install_dir}
 source venv/bin/activate
