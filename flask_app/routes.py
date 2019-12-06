@@ -115,17 +115,17 @@ def enter_observation():
             altitude = form.altitude.data,
             description = form.description.data
         )
-        # Add these changes to the database
-        db.session.add(observation_data)
-
+        
         # Create an association with the observers and the observation
         if form.observer1.data != None:
             observer1 = Users.query.filter_by(user_name = form.observer1.data).first()
-            Observations.observers.append(observer1)
+            observation_data.observers.append(observer1)
         if form.observer2.data != None:
             observer2 = Users.query.filter_by(user_name = form.observer2.data).first()
-            Observations.observers.append(observer2)
+            observation_data.observers.append(observer2)
 
+        # Add these changes to the database
+        db.session.add(observation_data)
         # Commit        
         db.session.commit()
         return redirect(url_for('home'))

@@ -58,14 +58,8 @@ class Observations(db.Model):
 
     # Defines the format when querying the database
     def __repr__(self):
-        #observer = []
-        #for user in self.observers
-        #    observer.append(user.user_name)
-
         return ''.join([
             'User ID: ', self.userID, '\r\n',
-            #'Observer 1: ', observer[0], '\r\n',
-            #'Observer 2: ', observer[1], '\r\n',
             'Title: ', self.title, '\r\n',
             'Date and Time Posted: ', self.post_date_time, '\r\n',
             'Location: ', self.location, '\r\n',
