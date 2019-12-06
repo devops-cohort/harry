@@ -101,7 +101,7 @@ def account():
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
     
-    if delete_account.validate_on_submit:
+    if delete_account.validate_on_submit():
         Users.query.filter_by(userID = current_user.userID).delete()
         db.session.commit()
 
