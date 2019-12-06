@@ -20,8 +20,8 @@ class Users(db.Model, UserMixin):
     last_name = db.Column(db.String(50), nullable = False) # User Surname
 
     # Define relationship with observations, 'secondary' refers to joining table to allow for many-to-many relationship
-    observations = db.relationship('Observations', backref = 'author', lazy = True)
-    observers = db.relationship('Observations', secondary = observers, backref = db.backref('observers', lazy = 'dynamic'))
+    observations = db.relationship('Observations', cascade = 'delete', backref = 'author', lazy = True)
+    observers = db.relationship('Observations', secondary = observers, cascade = 'delete', backref = db.backref('observers', lazy = 'dynamic'))
 
     # Getter function for 'load_user' function to get userID
     def get_id(self):
