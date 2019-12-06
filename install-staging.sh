@@ -1,5 +1,5 @@
 # install the service script
-sudo cp flask-app.service /etc/systemd/system/
+sudo cp flask-app-staging.service /etc/systemd/system/
 # reload the service scripts
 sudo systemctl daemon-reload
 # stop the old service
