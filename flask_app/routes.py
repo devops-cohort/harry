@@ -105,7 +105,7 @@ def account():
         Users.query.filter_by(userID = current_user.userID).delete()
         db.session.commit()
 
-    return render_template('account.html', title = 'Account', form = form, delete_account = delete)
+    return render_template('account.html', title = 'Account', form = form, delete = delete_account)
 
 # Route to observation post page
 @app.route('/enterobservation', methods = ['GET', 'POST'])
