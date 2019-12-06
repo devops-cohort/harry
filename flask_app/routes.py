@@ -130,8 +130,7 @@ def enter_observation():
         )
         
         # Create an association with the observers and the observation
-        observer_author = Users.current_user
-        observation_data.observers.append(observer_author)
+        observation_data.observers.append(current_user)
         if form.observer1.data is not None:
             observer1 = Users.query.filter_by(user_name = form.observer1.data).first()
             observation_data.observers.append(observer1)
