@@ -102,7 +102,7 @@ def account():
         form.email.data = current_user.email
     
     if delete_account.validate_on_submit:
-        Users.query.filter_by(current_user).delete()
+        Users.query.filter_by(current_user.user_id).delete()
         db.session.commit()
 
     return render_template('account.html', title = 'Account', form = form, delete_account = delete)
