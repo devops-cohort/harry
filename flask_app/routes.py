@@ -102,6 +102,7 @@ def account():
         form.email.data = current_user.email
 
     if delete_account.is_submitted():
+        print("iojh")
         Users.query.filter_by(userID = current_user.userID).delete()
         db.session.commit()
 
