@@ -102,9 +102,10 @@ def account():
         form.email.data = current_user.email
 
     if delete_account.is_submitted():
-        print("iojh")
         Users.query.filter_by(userID = current_user.userID).delete()
         db.session.commit()
+
+        return redirect(url_for('signup'))
 
     return render_template('account.html', title = 'Account', form = form, delete = delete_account)
 
