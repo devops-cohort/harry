@@ -62,6 +62,7 @@ def signup():
         # Send data to database
         db.session.add(user)
         db.session.commit()
+        login_user(user, remember = form.remember.data)
         return redirect(url_for('home'))
     else:
         print(form.errors)
@@ -83,28 +84,30 @@ def about():
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+    # Create account update form
     form = UpdateAccountForm()
+    # Create delete button
     delete_account = DeleteAccount()
     
+    # If update form passes validation upon submit
     if form.validate_on_submit():
         current_user.user_name = form.user_name.data
         current_user.first_name = form.first_name.data
         current_user.last_name = form.last_name.data
         current_user.email = form.email.data
         db.session.commit()
-
         return redirect(url_for('account'))
-
+    # Else if the the http request is a GET request
     elif request.method == 'GET':
         form.user_name.data = current_user.user_name
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
-
+   
+    # If the delete button is pressed
     if delete_account.is_submitted():
         Users.query.filter_by(userID = current_user.userID).delete()
         db.session.commit()
-
         return redirect(url_for('signup'))
 
     return render_template('account.html', title = 'Account', form = form, delete = delete_account)
@@ -127,10 +130,10 @@ def enter_observation():
         )
         
         # Create an association with the observers and the observation
-        if form.observer1.data != None:
+        if form.observer1.data is not None:
             observer1 = Users.query.filter_by(user_name = form.observer1.data).first()
             observation_data.observers.append(observer1)
-        if form.observer2.data != None:
+        if form.observer2.data is not None:
             observer2 = Users.query.filter_by(user_name = form.observer2.data).first()
             observation_data.observers.append(observer2)
 
