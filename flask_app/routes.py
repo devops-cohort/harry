@@ -2,7 +2,7 @@
 from flask import render_template, redirect, url_for, request
 from flask_app import app, db, bcrypt
 from flask_app.models import Observations, Users
-from flask_app.forms import ObservationForm, SignUpForm, LogInForm, UpdateAccountForm
+from flask_app.forms import ObservationForm, SignUpForm, LogInForm, UpdateAccountForm, DeleteAccount
 from flask_login import login_user, current_user, logout_user, login_required
 
 # Route to login page
@@ -84,6 +84,7 @@ def about():
 @login_required
 def account():
     form = UpdateAccountForm()
+    delete_account = DeleteAccount()
     
     if form.validate_on_submit():
         current_user.user_name = form.user_name.data
@@ -91,13 +92,20 @@ def account():
         current_user.last_name = form.last_name.data
         current_user.email = form.email.data
         db.session.commit()
+
         return redirect(url_for('account'))
+
     elif request.method == 'GET':
         form.user_name.data = current_user.user_name
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
-    return render_template('account.html', title = 'Account', form = form)
+    
+    if delete_account.validate_on_submit:
+        Users.query.filter_by(current_user).delete()
+        db.session.commit()
+
+    return render_template('account.html', title = 'Account', form = form, delete_account = delete)
 
 # Route to observation post page
 @app.route('/enterobservation', methods = ['GET', 'POST'])

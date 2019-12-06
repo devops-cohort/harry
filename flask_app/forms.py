@@ -69,6 +69,7 @@ class LogInForm(FlaskForm):
         if user == False:
             raise ValidationError('Incorrect password')
 
+# Class for account update form
 class UpdateAccountForm(FlaskForm):
     user_name = StringField('User Name',
         validators = [
@@ -97,6 +98,9 @@ class UpdateAccountForm(FlaskForm):
             user = Users.query.filter_by(email = email.data).first()
             if user:
                 raise ValidationError('Email already in use - Please choose another')
+
+class DeleteAccount(FlaskForm):
+    delete = SubmitField('Delete Account')
 
 # Class for observation post form
 class ObservationForm(FlaskForm):

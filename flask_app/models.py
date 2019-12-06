@@ -16,8 +16,8 @@ class Users(db.Model, UserMixin):
     user_name = db.Column(db.String(15), nullable = False, unique = True) # User Name
     email = db.Column(db.String(75), nullable = False, unique = True) # Email
     password = db.Column(db.String(100), nullable = False) # Password
-    first_name = db.Column(db.String(50), nullable = False, unique = True) # User Forename
-    last_name = db.Column(db.String(50), nullable = False, unique = True) # User Surname
+    first_name = db.Column(db.String(50), nullable = False) # User Forename
+    last_name = db.Column(db.String(50), nullable = False) # User Surname
 
     # Define relationship with observations, 'secondary' refers to joining table to allow for many-to-many relationship
     observations = db.relationship('Observations', backref = 'author', lazy = True)
