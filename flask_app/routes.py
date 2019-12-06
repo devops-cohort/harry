@@ -94,16 +94,16 @@ def account():
         db.session.commit()
 
         return redirect(url_for('account'))
-    
-    elif delete_account.validate_on_submit():
-        Users.query.filter_by(userID = current_user.userID).delete()
-        db.session.commit()
 
     elif request.method == 'GET':
         form.user_name.data = current_user.user_name
         form.first_name.data = current_user.first_name
         form.last_name.data = current_user.last_name
         form.email.data = current_user.email
+
+    if delete_account.is_submitted():
+        Users.query.filter_by(userID = current_user.userID).delete()
+        db.session.commit()
 
     return render_template('account.html', title = 'Account', form = form, delete = delete_account)
 
