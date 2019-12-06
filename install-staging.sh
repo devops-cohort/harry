@@ -1,11 +1,11 @@
 # install the service script
-sudo cp flask-app-staging.service /etc/systemd/system/
+sudo cp flask-app-development.service /etc/systemd/system/
 # reload the service scripts
 sudo systemctl daemon-reload
 # stop the old service
-sudo systemctl stop flask-app
+sudo systemctl stop flask-app-development
 # install the application files
-install_dir=/opt/flask-app
+install_dir=/opt/flask-app-development
 sudo rm -rf ${install_dir}
 sudo mkdir ${install_dir}
 sudo cp -r ./* ${install_dir}
