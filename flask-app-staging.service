@@ -1,0 +1,8 @@
+[Unit]
+Description=Flask Application
+[Service]
+User=pythonadm
+WorkingDirectory=/opt/flask-app
+ExecStart=/bin/bash -c 'cd /opt/flask-app && source ~/.bashrc && source ./venv/bin/activate && python3 app.py'
+[Install]
+WantedBy=multi-user.target
