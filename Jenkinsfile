@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
 		steps {
-                sh 'bash install-staging.sh'
+                sh 'bash install-development.sh'
             }
 	}
 	stage('Test') {
@@ -14,8 +14,8 @@ pipeline {
         stage('Run') {
             steps {
                 sh '''
-			# start the flask app
-			sudo systemctl start flask-app
+			# start the flask app development
+			sudo systemctl start flask-app-development
                 '''
             }
         }
