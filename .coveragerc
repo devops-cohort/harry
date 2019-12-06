@@ -1,2 +1,2 @@
 [run]
-omit = venv/*, testing/*
+omit = ./venv/*, ./testing/*
