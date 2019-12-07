@@ -57,12 +57,12 @@ class LogInForm(FlaskForm):
     remember = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
     
-    def validate_user(self, user_name):
+    def validate_user(self, user_name, password):
         user = Users.query.filter_by(user_name=user_name.data).first()
 
         if user is None:
             raise ValidationError('User name not recognised')
-            
+
         if bcrypt.check_password_hash(user.password, password.data):
             raise ValidationError('Incorrect password')
 
@@ -106,8 +106,12 @@ class ObservationForm(FlaskForm):
             DataRequired(),
             Length(min = 1, max = 30)
         ])
-    observer1 = StringField('Observer 1')
-    observer2 = StringField('Observer 2')
+    observer1 = StringField('Observer 1',
+        filters = [lambda x: x or None]
+        )
+    observer2 = StringField('Observer 2',
+        filters = [lambda x: x or None]
+        )
     location = StringField('Location',
         validators = [
             DataRequired(),
