@@ -83,8 +83,17 @@ class TestObservations(TestBase):
         Test that multiple users can be associated with an observation
         '''
 
-        # Find and save observation in table to variable 'observation'
-        observation = Observations.query.filter_by(title = 'test').all()
+        # Create an observation
+        observation = Observations(
+            title = 'test', 
+            author = 'admin', 
+            location = 'test house', 
+            azimuth = 243.74, 
+            altitude = 36.24, 
+            description = 'this is a test post'
+        )
+        # Add observation to database and commit
+        db.session.add(observation)
         # Find and save two test users to variables 'user1' and 'user2'
         user1 = Users.query.filter_by(user_name = 'test1').first()
         user2 = Users.query.filter_by(user_name = 'test2').first()
