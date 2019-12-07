@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateTimeField, FloatField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from flask_app import db
 from flask_app.models import Users
 from flask_login import current_user
 
@@ -35,7 +36,6 @@ class SignUpForm(FlaskForm):
             DataRequired(),
             EqualTo('password')
         ])
-
     submit = SubmitField('Sign Up')
 
     def validate_email(self, email):
@@ -60,13 +60,14 @@ class LogInForm(FlaskForm):
     def validate_user(self, user_name):
         user = Users.query.filter_by(user=user_name.data).first()
 
-        if user == False:
+        if user.user_name != user_name.data:
             raise ValidationError('User name not recognised')
 
     def validate_password(self, password):
+        hashed_pw = bcrypt.generate_password_hash(password.data)
         user = Users.query.filter_by(password=password.data).first()
 
-        if user == False:
+        if user.password != hashed_pw:
             raise ValidationError('Incorrect password')
 
 # Class for account update form
@@ -131,70 +132,13 @@ class ObservationForm(FlaskForm):
     submit = SubmitField('Submit')
 
     def validate_observer_1(self, observer1):
-        user = Users.query.filter_by(user=observer1.data).first()
+        exists = db.session.query(db.exists().where(Users.user_name == observer1.data)).scalar()
 
-        if user == False:
+        if exists is False:
             raise ValidationError('User name not recognised')
 
-    def validate_user(self, observer2):
-        user = Users.query.filter_by(user=observer2.data).first()
+    def validate_observer_2(self, observer2):
+        exists = db.session.query(db.exists().where(Users.user_name == observer2.data)).scalar()
 
-        if user == False:
+        if exists is False:
             raise ValidationError('User name not recognised')
-
-'''
-# Class for star post form
-class StarForm(FlaskForm):
-	name = StringField('Name',
-		validators = [
-			DataRequired(),
-			Length(min = 1, max = 30)
-		])
-	constellation = StringField('Constellation',
-		validators = [
-			DataRequired(),
-			Length(min = 1, max = 30)
-		])
-	right_ascension = StringField('Right Ascension',
-		validators = [
-			DataRequired(),
-			Length(min = 1, max = 30)
-		])
-	declination = StringField('Declination',
-		validators = [
-			DataRequired(),
-			Length(min = 1, max = 30)
-		])
-	description = StringField('Description',
-		validators = [
-				Length(min = 1, max = 2000)
-		])
-	submit = SubmitField('Submit')
-'''
-
-# Class for constellation post form
-class ConstellationForm(FlaskForm):
-    name = StringField('Name',
-        validators = [
-            DataRequired(),
-            Length(min = 1, max = 50)
-	])
-    right_ascension = StringField('Right Ascension',
-        validators = [
-            DataRequired(),
-            Length(min = 1, max = 30)
-	])
-    declination = StringField('Declination',
-        validators = [
-            DataRequired(),
-	    Length(min = 1, max = 30)
-	])
-    asterism = StringField('Asterism',
-	validators = [
-	    Length(min = 0, max = 50)
-	])
-    description = StringField('Description',
-	validators = [
-	    Length(min = 0, max = 2000)
-	])
-    submit = SubmitField('Submit')

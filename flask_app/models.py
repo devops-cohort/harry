@@ -52,10 +52,6 @@ class Observations(db.Model):
     altitude = db.Column(db.Float, nullable = False) # Altitude coordinate
     description = db.Column(db.Text, nullable = True) # Description of the observation
 
-    # Not Implemented
-    # star = db.Column(db.Integer, ForeignKey('star.starID'), nullable = False) # foreign key
-    # constellation = db.Column(db.Integer, ForeignKey('star.constellation'), nullable = False) # foreign key
-
     # Defines the format when querying the database
     def __repr__(self):
         return ''.join([
@@ -69,57 +65,3 @@ class Observations(db.Model):
             #'Star: ', self.star, '\r\n',
             #'Constellation: ', self.constellation, '\r\n',
         ])
-
-'''
-# Table to store star information
-class Stars(db.Model):
-    #__name__ = 'star'
-    starID = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    name = db.Column(db.String(50), nullable = False)
-    constellation = db.Column(db.Integer, ForeignKey('constellation.constellationID')) # foreign key
-    right_ascension = db.Column(db.String(30), nullable = False)
-    declination = db.Column(db.String(30), nullable = False)
-    #magnitude = db.Column(db.Integer, nullable = True)
-    #num_observations = db.Column(db.Integer, nullable = False)
-    description = db.Column(db.Text, nullable = True)
-    observations = relationship('Observations', backref = 'star', lazy = True)
-
-    # Function to return a representation of a star entity when the database is queried
-    def __repr__(self):
-        return ''.join([
-            'Star: ', self.name, '\r\n',
-            'Constellation: ', self.constellation, '\r\n',
-            'Right Ascension: ', self.right_ascension, '\r\n',
-            'Declination: ', self.declination, '\r\n',
-            #'Magnitude: ', self.magnitude, '\r\n',
-            #'Number of Observations: ', self.num_observations '\r\n',
-            'Description: ', self.description
-        ])
-'''
-
-'''
-# Table to store constellation information
-class Constellations(db.Model):
-    #__name__ = 'constellation'
-    constellationID = db.Column(db.Integer, primary_key = True, autoincrement = True)
-    name = db.Column(db.String(50), nullable = False)
-    user = db.Column(db.Integer, ForeignKey('user.userID'), nullable = False)
-    #num_stars = db.Column(db.Integer, nullable = False)
-    right_ascension = db.Column(db.String(30), nullable = False)
-    declination = db.Column(db.String(30), nullable = False)
-    asterism = db.Column(db.String(30), nullable = True)
-    description = db.Column(db.Text, nullable = True)
-    #stars = db.relationship('Stars', backref = 'constellation', lazy = True)
-
-    # Function to return a representation of a constellation entity when the database is queried
-    def __repr__(self):
-        return ''.join([
-            'Constellation: ', self.name, '\r\n',
-            'User: ', self.user, '\r\n',
-            #'Num. of Associated Stars: ', self.num_stars, '\r\n',
-            'Right Ascension: ', self.right_ascension, '\r\n',
-            'Declination: ', self.declination, '\r\n',
-            'Asterism: ', self.asterism, '\r\n',
-            'Description: ', self.description
-        ])
-'''
