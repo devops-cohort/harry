@@ -106,12 +106,8 @@ class ObservationForm(FlaskForm):
             DataRequired(),
             Length(min = 1, max = 30)
         ])
-    observer1 = StringField('Observer 1',
-        filters = [lambda x: x or None]
-        )
-    observer2 = StringField('Observer 2',
-        filters = [lambda x: x or None]
-        )
+    observer1 = StringField('Observer 1', default = None)
+    observer2 = StringField('Observer 2', default = None)
     location = StringField('Location',
         validators = [
             DataRequired(),
