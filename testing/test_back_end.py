@@ -82,11 +82,14 @@ class TestObservations(TestBase):
         '''
         Test that multiple users can be associated with an observation
         '''
-
+        # Find and save the test users
+        admin = Users.query.filter_by(user_name = 'admin').first()
+        user1 = Users.query.filter_by(user_name = 'test1').first()
+        user2 = Users.query.filter_by(user_name = 'test2').first()
         # Create an observation
         observation = Observations(
             title = 'test', 
-            author = self.setUp().admin, 
+            author = admin, 
             location = 'test house', 
             azimuth = 243.74, 
             altitude = 36.24, 
@@ -94,12 +97,9 @@ class TestObservations(TestBase):
         )
         # Add observation to database and commit
         db.session.add(observation)
-        # Find and save two test users to variables 'user1' and 'user2'
-        #user1 = Users.query.filter_by(user_name = 'test1').first()
-        #user2 = Users.query.filter_by(user_name = 'test2').first()
         # Create the association
-        observation.observers.append(self.setUp().user1)
-        observation.observers.append(self.setUp().user2)
+        observation.observers.append(user1)
+        observation.observers.append(user2)
         # Commit to the database
         db.session.commit()
         # Create joining table of observers' usernames and observations' obersation IDs

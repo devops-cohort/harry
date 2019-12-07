@@ -58,12 +58,12 @@ class LogInForm(FlaskForm):
     submit = SubmitField('Sign In')
     
     def validate_user(self, user_name):
-        user = Users.query.filter_by(user=user_name.data).first()
+        user = Users.query.filter_by(user_name=user_name.data).first()
 
         if user:
             raise ValidationError('User name not recognised')
 
-    def validate_password(self, password):
+    def validate_password(self, user_name):
         user = Users.query.filter_by(user_name=user_name.data).first()
 
         if bcrypt.check_password_hash(user.password, password.data):
