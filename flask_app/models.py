@@ -55,12 +55,12 @@ class Observations(db.Model):
     # Defines the format when querying the database
     def __repr__(self):
         return ''.join([
-            'User ID: ', self.userID, '\r\n',
+            'User ID: ', str(self.userID), '\r\n',
             'Title: ', self.title, '\r\n',
-            'Date and Time Posted: ', self.post_date_time, '\r\n',
+            'Date and Time Posted: ', str(self.post_date_time), '\r\n',
             'Location: ', self.location, '\r\n',
-            'Azimuth: ', self.azimuth, '\r\n',
-            'Altitude: ', self.altitude, '\r\n',
+            'Azimuth: ', str(self.azimuth), '\r\n',
+            'Altitude: ', str(self.altitude), '\r\n',
             'Description: ', self.description
             #'Star: ', self.star, '\r\n',
             #'Constellation: ', self.constellation, '\r\n',
