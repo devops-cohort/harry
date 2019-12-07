@@ -103,12 +103,9 @@ class TestObservations(TestBase):
         observation.observers.append(user2)
         # Commit to the database
         db.session.commit()
-        # Create joining table of observers' usernames and observations' obersation IDs
-        # Should be saved as a list of tuples
-        observers_for_observation = db.session.query(Users.user_name, Observations.observationID).outerjoin(Observations, Users.userID == observers.Users.userID).all()
-        # Asser that user1 and user2 should be associated with observation with observationID 1
-        self.assertEqual(observers_for_observation[0], ('test1', 1))
-        self.assertEqual(observers_for_observation[1], ('test2', 1))
+        # Assert that user1 and user2 should be associated with observation
+        self.assertEqual(observation.observers[0].user_name, 'test1')
+        self.assertEqual(observation.observers[1].user_name, 'test2')
 
 class TestLogin(TestBase):
 
