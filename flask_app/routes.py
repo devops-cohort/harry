@@ -129,6 +129,11 @@ def enter_observation():
             description = form.description.data
         )
         
+        # Add these changes to the database
+        db.session.add(observation_data)
+        # Commit        
+        db.session.commit()
+
         # Create an association with the observers and the observation
         observation_data.observers.append(current_user)
         if form.observer1.data is not None:
@@ -138,8 +143,6 @@ def enter_observation():
             observer2 = Users.query.filter_by(user_name = form.observer2.data).first()
             observation_data.observers.append(observer2)
 
-        # Add these changes to the database
-        db.session.add(observation_data)
         # Commit        
         db.session.commit()
         return redirect(url_for('home'))
