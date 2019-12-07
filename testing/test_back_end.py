@@ -62,11 +62,12 @@ class TestObservations(TestBase):
         '''
         Test the number of records in the observations table
         '''
-
+        # Find and save the test users
+        admin = Users.query.filter_by(user_name = 'admin').first()
         # Create an observation
         observation = Observations(
             title = 'test', 
-            author = self.setUp().admin, 
+            author = admin, 
             location = 'test house', 
             azimuth = 243.74, 
             altitude = 36.24, 
@@ -104,7 +105,7 @@ class TestObservations(TestBase):
         db.session.commit()
         # Create joining table of observers' usernames and observations' obersation IDs
         # Should be saved as a list of tuples
-        observers_for_observation = db.session.query(Users.user_name, Observations.observationID).outerjoin(Observations, Users.userID == Observations.observers.userID).all()
+        observers_for_observation = db.session.query(Users.user_name, Observations.observationID).outerjoin(Observations, Users.userID == Observations.observers.Users.userID).all()
         # Asser that user1 and user2 should be associated with observation with observationID 1
         self.assertEqual(observers_for_observation[0], ('test1', 1))
         self.assertEqual(observers_for_observation[1], ('test2', 1))
