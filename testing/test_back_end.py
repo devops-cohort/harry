@@ -84,7 +84,7 @@ class TestObservations(TestBase):
         '''
 
         # Find and save observation in table to variable 'observation'
-        observation = Observations.query.filter_by(title = 'test').first()
+        observation = Observations.query.filter_by(title = 'test').all()
         # Find and save two test users to variables 'user1' and 'user2'
         user1 = Users.query.filter_by(user_name = 'test1').first()
         user2 = Users.query.filter_by(user_name = 'test2').first()
