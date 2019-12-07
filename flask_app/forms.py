@@ -60,14 +60,13 @@ class LogInForm(FlaskForm):
     def validate_user(self, user_name):
         user = Users.query.filter_by(user=user_name.data).first()
 
-        if user.user_name != user_name.data:
+        if user:
             raise ValidationError('User name not recognised')
 
     def validate_password(self, password):
-        hashed_pw = bcrypt.generate_password_hash(password.data)
-        user = Users.query.filter_by(password=password.data).first()
+        user = Users.query.filter_by(user_name=user_name.data).first()
 
-        if user.password != hashed_pw:
+        if bcrypt.check_password_hash(user.password, password.data):
             raise ValidationError('Incorrect password')
 
 # Class for account update form
