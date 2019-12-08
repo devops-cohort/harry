@@ -111,7 +111,8 @@ def account():
    
     # If the delete button is pressed
     if delete_account.is_submitted():
-        Users.query.filter_by(userID = current_user.userID).delete()
+        user = Users.query.filter_by(userID = current_user.userID).first()
+        db.session.delete(user)
         db.session.commit()
         return redirect(url_for('signup'))
 
