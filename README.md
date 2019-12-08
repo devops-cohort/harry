@@ -8,8 +8,10 @@
 * Development Site: (update on the day):5000
 
 ## Contents
-* [Brief](##brief)
-
+* [Brief](#brief)
+   * [Additional Requirements](#additional-requirements)
+   * [My Approach](#my-approach)
+   * [](#)
 ## Brief
 The brief provided to us for this project sets the following out as its overall objective:
 "To create a CRUD application with utilisation of supporting tools, methodologies and technologies that encapsulate all core modules covered during training."
@@ -28,14 +30,26 @@ In addition to what has been set out in the brief, I am also required to include
 
 ### My Approach
 To achieve this, I have decided to produce a simple stargazing companion app that must allow the user to do the following:
+* Create a user account that stores:
+   * *User Name*
+   * *First and Last Name*
+   * *Email*
+   * *Password*
+* Create posts of observations that user has made whilst stargazing with the following information:
+   * *Title* of the post
+   * *Author* of the post
+   * *Date and time* that the post was made
+   * *Observers* who also took part in this observation (essentially tagging other users in a post)
+   * *Location* at which the observation took place
+   * *Azimuth* coordinate of the observed object 
+   * *Altitude* coordinate of the observed object
+   * *Description* of the observation
+* Update and delete a user account
+
+On top of this, I would like to allow the user to:
 * Refer to a database of stars and corresponding constellations with coordinate data
 * Add/delete records of stars and constellations in the database
-* Record observations that they have made on a particular day/time at a particular location
-The following is functionality I would like to implement into the application but are not necessary to satisfy the brief:
-* Ability to call up every star that belongs to a certain constellation
-
-### Scope
-For the sake of simplicity, I will only be adding a limited number of constellations into the database by default. I'm aiming to add the 12 elliptical constellations, but I may not even achieve this as data-entry is a long and laborious task, and I'm being tasked to make a great app, not an exhaustive database. Same applies to the stars, of which there are much, much more in the night sky.
+* Select every star that belongs to a certain constellation
 
 ## Architecture
 ### Database Structure
