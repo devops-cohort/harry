@@ -17,11 +17,13 @@ def login():
 	
     # If the form passes validation checks
     if form.validate_on_submit():
-        # 
+        # Query the database for users with the username passed through the form
         user = Users.query.filter_by(user_name=form.user_name.data).first()
-	
+        # If user exists and form password == hashed password in database
         if user and bcrypt.check_password_hash(user.password, form.password.data):
+            # Log the user in using these details
             login_user(user, remember = form.remember.data)
+            # Set page to redirect to as the page the user was trying to navigate to
             next_page = request.args.get('next')
 
             if next_page:
@@ -158,35 +160,3 @@ def enter_observation():
 @app.route('/coverage')
 def coverage_report():
     return render_template('coveragereport.html', title = 'Coverage Report')
-
-'''
-# Route to celestial database
-@app.route('/lookup')
-@app.route('/query')
-def query():
-    return render_template('query.html', title='Look Up')
-'''
-'''
-# Route to observation post page
-@app.route('/enterconstellation', methods = ['GET', 'POST'])
-@login_required
-def enter_constellation():
-    form = ConstellationForm()
-
-    if form.validate_on_submit():
-        constellation_data = Constellations(
-            name = form.name.data,
-            right_ascension = form.right_ascension.data,
-            declination = form.declination.data,
-            asterism = form.asterism.data,
-            description = form.description.data
-        )
-
-        db.session.add(constellation_data)
-        db.session.commit()
-        return redirect(url_for('home'))
-    else:
-        print(form.errors)
-
-    return render_template('enterconstellation.html', title = 'Enter Constellation', form = form)
-'''
