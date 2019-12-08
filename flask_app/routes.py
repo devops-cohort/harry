@@ -28,6 +28,8 @@ def login():
                 return redirect(next_page)
             else:
                 return redirect(url_for('home'))
+        else:
+            print(form.errors)
     else:
         print(form.errors)
 
@@ -73,7 +75,9 @@ def signup():
 @app.route('/')
 @app.route('/home')
 def home():
-    observations = Observations.query.all()
+    # Query database for all observations,
+    # order by date/time posted in descending order
+    observations = Observations.query.order_by(Observations.post_date_time.desc()).all()
     return render_template('home.html', title = 'Home', posts = observations)
 
 # Route to about page
@@ -128,21 +132,20 @@ def enter_observation():
             altitude = form.altitude.data,
             description = form.description.data
         )
-        
-        # Add these changes to the database
-        db.session.add(observation_data)
-        # Commit        
-        db.session.commit()
 
         # Create an association with the observers and the observation
         observation_data.observers.append(current_user)
         if form.observer1.data != '':
             observer1 = Users.query.filter_by(user_name = form.observer1.data).first()
-            observation_data.observers.append(observer1)
+            if observer1:
+                observation_data.observers.append(observer1)
         if form.observer2.data != '':
             observer2 = Users.query.filter_by(user_name = form.observer2.data).first()
-            observation_data.observers.append(observer2)
+            if observer2:
+                observation_data.observers.append(observer2)
 
+        # Add these changes to the database
+        db.session.add(observation_data)
         # Commit        
         db.session.commit()
         return redirect(url_for('home'))
