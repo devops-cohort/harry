@@ -7,9 +7,9 @@
 			<h3>{{ post.title }}</h3>
 			<span>by <i>{{ post.author.first_name }} {{ post.author.last_name }}</i></span>
 			<span>at <i>{{ post.post_date_time }}</i></span>
-			<p><b> - Observers: </b>{{ post.author.first_name }} {{ post.author.last_name }}
+			<p><b> - Observers: </b>
 									{% for observer in post.observers %}
-									{ observer.first_name }} {{ observer.last_name }}
+									{{ observer.first_name }} {{ observer.last_name }}
 									{% endfor %}
 								</p>
 			<p><b> - Location: </b>{{ post.location }}</p>
