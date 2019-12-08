@@ -73,5 +73,5 @@ Harry Volker
 [ci]: https://i.imgur.com/2G7joFp.png
 [riskassessment]: https://i.imgur.com/btY8HRY.png
 [coverage]: https://i.imgur.com/WDaANiD.png
-[pytestconstole]: https://i.imgur.com/qaa3uzp.png
+[pytestconsole]: https://i.imgur.com/qaa3uzp.png
 [trello]: https://i.imgur.com/etDOlwa.png
