@@ -9,7 +9,7 @@
 			<span>at <i>{{ post.post_date_time }}</i></span>
 			<p><b> - Observers: </b>
 									{% for observer in post.observers %}
-									{{ observer.first_name }} {{ observer.last_name }}
+									| {{ observer.first_name }} {{ observer.last_name }} |
 									{% endfor %}
 								</p>
 			<p><b> - Location: </b>{{ post.location }}</p>
