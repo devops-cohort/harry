@@ -1,11 +1,11 @@
 # Stargazing Companion App
 
 ### Presentation Resources:
-Presentation: https://docs.google.com/presentation/d/1C0J2M6T_B_fquxnGgjRV6K_arbpyLvmv8f2Z-C-wYa0/edit?usp=sharing
-Trello: https://trello.com/b/UfMXjN8h/constellations
-Website: 35.214.26.193:8001
-Jenkins: (update on the day):8080
-Development Site: (update on the day):5000
+* Presentation: https://docs.google.com/presentation/d/1C0J2M6T_B_fquxnGgjRV6K_arbpyLvmv8f2Z-C-wYa0/edit?usp=sharing
+* Trello: https://trello.com/b/UfMXjN8h/constellations
+* Website: 35.214.26.193:8001
+* Jenkins: (update on the day):8080
+* Development Site: (update on the day):5000
 
 ## Contents
 
