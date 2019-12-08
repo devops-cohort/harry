@@ -66,8 +66,7 @@ def signup():
         # Send data to database
         db.session.add(user)
         db.session.commit()
-        login_user(user, remember = form.remember.data)
-        return redirect(url_for('home'))
+        return redirect(url_for('login'))
     else:
         print(form.errors)
 
