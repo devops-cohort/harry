@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block body_content %}
+	<h1>Home Page</h1>
+	<h2>Recent Observations</h2>
+	{% for post in posts %}
+		<div>
+			<h3>{{ post.title }}</h3>
+			<span>by <i>{{ post.author.first_name }} {{ post.author.last_name }}</i></span>
+			<span>at <i>{{ post.post_date_time }}</i></span>
+			<p><b> - Observers: </b>
+									{% for observer in post.observers %}
+									{{ observer.first_name }} {{ observer.last_name }} || 
+									{% endfor %}
+								</p>
+			<p><b> - Location: </b>{{ post.location }}</p>
+			<p><b> - Azimuth: </b>{{ post.azimuth }}</p>
+			<p><b> - Altitude: </b>{{ post.altitude }}</p>
+			<p><b> - Description: </b>{{ post.description }}</p>
+		</div>
+	{% endfor %}
+{% endblock body_content %}
