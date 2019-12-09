@@ -3,9 +3,9 @@
 ### Resources:
 * Presentation: https://docs.google.com/presentation/d/1C0J2M6T_B_fquxnGgjRV6K_arbpyLvmv8f2Z-C-wYa0/edit?usp=sharing
 * Trello: https://trello.com/b/UfMXjN8h/constellations
-* Website: 35.214.26.193:8001
-* Jenkins: 35.246.56.98:8080
-* Development Site: 35.246.56.98:5000
+* Website: http://35.214.26.193:8001/
+* Jenkins: http://35.246.56.98:8080/
+* Development Site: http://35.246.56.98:5000/
 
 ## Contents
 * [Brief](#brief)
